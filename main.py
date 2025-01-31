@@ -42,4 +42,21 @@ def end(size, lights, device):
                                                     int(device)
                                                     )
                         )
+
+@app.route('/form')
+def form():
+    return render_template('form.html')
+
+#Resultados del formulario
+@app.route('/submit', methods=['POST'])
+def submit_form():
+    # Declarar variables para la recogida de datos
+    name = request.form['name']
+
+    # Puedes guardar tus datos o enviarlos por correo electrónico
+    return render_template('form_result.html', 
+                           # Coloque aquí las variables
+                           name=name,
+                           )
+
 app.run(debug=True)
