@@ -1,5 +1,5 @@
 # Importar
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 
 app = Flask(__name__)
@@ -52,11 +52,25 @@ def form():
 def submit_form():
     # Declarar variables para la recogida de datos
     name = request.form['name']
+    email = request.form['email']
+    address = request.form['address']
+    date = request.form['date']
+
+    with open('form.txt', 'a') as f:
+        f.write(f"Nombre: {name} \n" )
+        f.write(f"Email: {email}\n")
+        f.write(f"Dirección: {address}\n")
+        f.write(f"Fecha: {date}\n")
+        f.write("-" * 40 + "\n")
+
 
     # Puedes guardar tus datos o enviarlos por correo electrónico
     return render_template('form_result.html', 
                            # Coloque aquí las variables
                            name=name,
+                           email = email,
+                           address = address ,
+                           date = date
                            )
 
 app.run(debug=True)
